@@ -14,7 +14,7 @@ class App extends Component {
          {
             id: 2,
             title: "shovel driveway",
-            completed: false
+            completed: true  
          },
          {
             id: 3,
@@ -23,12 +23,24 @@ class App extends Component {
          }
       ]
    }
+
+   markComplete = (id) => {
+      console.log(id);
+      this.setState({ tasks: this.state.tasks.map(task => {
+         if (task.id === id) { // if the current task.id matches the id passed into the markComplete function, change the completed boolean to the opposite
+            task.completed = !task.completed
+         } 
+         return task;
+      })})
+   }
    
    render() {
-      console.log(this.state.tasks);
       return (
          <div className="App"> 
-            <Tasks tasks={this.state.tasks}  /> 
+            <Tasks 
+               tasks={this.state.tasks} 
+               markComplete={this.markComplete} 
+            /> 
          </div>
       );
    }
