@@ -33,6 +33,12 @@ class App extends Component {
          return task;
       })})
    }
+
+   deleteTask = (id) => {
+      console.log(id); 
+      // the spread operator is being use so we don't have to compose the entire tasks array that is being filtered. 
+      this.setState({ tasks: [...this.state.tasks.filter(task => task.id !== id)]}) 
+   }
    
    render() {
       return (
@@ -40,7 +46,7 @@ class App extends Component {
             <Tasks 
                tasks={this.state.tasks} 
                markComplete={this.markComplete} 
-            /> 
+               deleteTask = {this.deleteTask} /> 
          </div>
       );
    }

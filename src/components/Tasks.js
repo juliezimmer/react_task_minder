@@ -8,7 +8,8 @@ class Tasks extends Component {
          <TaskItem 
             task={task} 
             key={task.id}
-            markComplete={this.props.markComplete} /> 
+            markComplete={this.props.markComplete} 
+            deleteTask = {this.props.deleteTask} /> 
       ))
    }
 }
