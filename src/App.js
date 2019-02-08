@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from './components/layout/Header';
 import Tasks from './components/Tasks';
 
 import './App.css'; // brings in the global CSS
@@ -43,6 +44,7 @@ class App extends Component {
    render() {
       return (
          <div className="App"> 
+            <Header />
             <Tasks 
                tasks={this.state.tasks} 
                markComplete={this.markComplete} 
