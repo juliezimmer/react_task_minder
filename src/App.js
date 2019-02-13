@@ -3,30 +3,24 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
+import About from './components/pages/About';
 import uuid from 'uuid';
+import axios from 'axios';
 
 import './App.css'; // brings in the global CSS
 
+
 class App extends Component {
    state = {
-      tasks: [
-         {
-            id: uuid.v4(),
-            title: "take out trash",
-            completed: false
-         },
-         {
-            id: uuid.v4(),
-            title: "shovel driveway",
-            completed: true  
-         },
-         {
-            id: uuid.v4(),
-            title: "clean out cat boxes", 
-            completed: false
-         }
-      ]
+      tasks: []
    }
+
+   componentDidMount() {
+      // ?_limit=10 is a query parameter that limits the number of todos returned to 10
+      axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+         .then((res) => this.setState({tasks: res.data}))
+   }
+
    // markComplete Toggle
    markComplete = (id) => {
       console.log(id);
@@ -63,11 +57,19 @@ class App extends Component {
             <div className="App"> 
                <div className="container">
                   <Header />
-                  <AddTask addTask={this.addTask}/>
-                  <Tasks 
-                     tasks={this.state.tasks} 
-                     markComplete={this.markComplete} 
-                     deleteTask = {this.deleteTask} /> 
+                  <Route exact path="/" render={props => (
+                     <React.Fragment>
+                        <AddTask addTask={this.addTask}/>
+                        <Tasks 
+                           tasks={this.state.tasks} 
+                           markComplete={this.markComplete} 
+                           deleteTask = {this.deleteTask} /> 
+                     </React.Fragment>
+                  )} />
+                  <Route path="/about" component={About}
+
+                  />
+                  
                </div>
             </div>
          </Router>
