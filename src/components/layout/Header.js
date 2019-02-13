@@ -1,5 +1,6 @@
 import React from 'react';
 
+//another format for stateless, functional component
 function Header() {
    return (
       <header style={headerStyle}>

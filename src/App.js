@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/layout/Header';
 import Tasks from './components/Tasks';
+import AddTask from './components/AddTask';
 
 import './App.css'; // brings in the global CSS
 
@@ -24,7 +25,7 @@ class App extends Component {
          }
       ]
    }
-
+   // markComplete Toggle
    markComplete = (id) => {
       console.log(id);
       this.setState({ tasks: this.state.tasks.map(task => {
@@ -38,17 +39,30 @@ class App extends Component {
    deleteTask = (id) => {
       console.log(id); 
       // the spread operator is being use so we don't have to compose the entire tasks array that is being filtered. 
-      this.setState({ tasks: [...this.state.tasks.filter(task => task.id !== id)]}) 
+      this.setState({ tasks: [...this.state.tasks.filter(task => task.id !== id)]});
+   }
+
+   addTask = (title) => {
+      console.log(title);
+      const newTask = {
+         id: 4,
+         title,
+         completed: false
+      }
+      this.setState({ tasks: [...this.state.tasks, newTask]});   
    }
    
    render() {
       return (
          <div className="App"> 
-            <Header />
-            <Tasks 
-               tasks={this.state.tasks} 
-               markComplete={this.markComplete} 
-               deleteTask = {this.deleteTask} /> 
+            <div className="container">
+               <Header />
+               <AddTask addTask={this.addTask}/>
+               <Tasks 
+                  tasks={this.state.tasks} 
+                  markComplete={this.markComplete} 
+                  deleteTask = {this.deleteTask} /> 
+            </div>
          </div>
       );
    }
