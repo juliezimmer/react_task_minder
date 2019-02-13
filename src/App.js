@@ -4,7 +4,7 @@ import Header from './components/layout/Header';
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
 import About from './components/pages/About';
-import uuid from 'uuid';
+// import uuid from 'uuid';
 import axios from 'axios';
 
 import './App.css'; // brings in the global CSS
@@ -34,21 +34,20 @@ class App extends Component {
 
    deleteTask = (id) => {
       console.log(id); 
-      // the spread operator is being use so we don't have to compose the entire tasks array that is being filtered. 
-      this.setState({ tasks: [...this.state.tasks.filter(task => task.id !== id)]});
+      axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+         .then((res) => this.setState({ tasks: [...this.state.tasks.filter(task => task.id !== id)]})
+      );
    }
 
    // addTask method takes the title (name of the task entered by the user) as a parameter.
    // the new task has to be added to the app level state object. 
    // In order to add this task to the state, a copy of the state object is needed
    addTask = (title) => {
-      console.log(title);
-      const newTask = {
-         id: uuid.v4(),
+      axios.post('https://jsonplaceholder.typicode.com/todos', {
          title,
-         completed: false
-      }
-      this.setState({ tasks: [...this.state.tasks, newTask]});   
+         completed:false
+      })
+         .then((res) => this.setState({ tasks: [...this.state.tasks, res.data ]}));
    }
    
    render() {

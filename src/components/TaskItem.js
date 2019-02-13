@@ -28,7 +28,9 @@ class TaskItem extends Component {
 }
 // PropTypes
 TaskItem.propTypes = {
-   task: PropTypes.object.isRequired
+   task: PropTypes.object.isRequired,
+   markComplete: PropTypes.func.isRequired,
+   deleteTask: PropTypes.func.isRequired
 }
 
 const btnStyle = {

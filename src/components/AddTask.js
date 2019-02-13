@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AddTask extends Component {
    // This is considered component state; it only exists within the component
@@ -40,6 +41,10 @@ class AddTask extends Component {
          </form>
       )
    }
+}
+
+AddTask.propTypes = {
+   addTask: PropTypes.func.isRequired
 }
 
 export default AddTask;
