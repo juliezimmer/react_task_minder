@@ -8,13 +8,16 @@ class AddTask extends Component {
 
    onSubmit = (e) => {
       e.preventDefault(); 
-      // this information needs to be passed up the component tree, so we will use a props method:
-      this.props.addTask(this.state.title); // the title is passed in as an argument.
-      this.setState({ title: ' '}); // title is re-set fo an empty string until a task is added again. 
+      // this information needs to be passed up the component tree, so a props method is used, this.props.addTask() and the title (the task name that was entered by the user,m is passed in as an argument.:
+      this.props.addTask(this.state.title); 
+      
+      // title is re-set to an empty string until another task is added.
+      this.setState({ title: ' '});  
    }
 
-
-   // the event parameter, e, can be used to get the value for title.
+   // the event parameter, e, can be used to get the value for the state property, title.
+   // need to set the state property, title, to whatever the value is (which is what the user entered in the input). 
+   // this onChange handler sets the title property to whatever was typed into the input field by the user.
    onChange = (e) => this.setState({ [e.target.name]: e.target.value});
 
    render() {

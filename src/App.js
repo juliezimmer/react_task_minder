@@ -42,6 +42,9 @@ class App extends Component {
       this.setState({ tasks: [...this.state.tasks.filter(task => task.id !== id)]});
    }
 
+   // addTask method takes the title (name of the task entered by the user) as a parameter.
+   // the new task has to be added to the app level state object. 
+   // In order to add this task to the state, a copy of the state object is needed
    addTask = (title) => {
       console.log(title);
       const newTask = {
