@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
+import uuid from 'uuid';
 
 import './App.css'; // brings in the global CSS
 
@@ -9,17 +11,17 @@ class App extends Component {
    state = {
       tasks: [
          {
-            id: 1,
+            id: uuid.v4(),
             title: "take out trash",
             completed: false
          },
          {
-            id: 2,
+            id: uuid.v4(),
             title: "shovel driveway",
             completed: true  
          },
          {
-            id: 3,
+            id: uuid.v4(),
             title: "clean out cat boxes", 
             completed: false
          }
@@ -48,7 +50,7 @@ class App extends Component {
    addTask = (title) => {
       console.log(title);
       const newTask = {
-         id: 4,
+         id: uuid.v4(),
          title,
          completed: false
       }
@@ -57,16 +59,18 @@ class App extends Component {
    
    render() {
       return (
-         <div className="App"> 
-            <div className="container">
-               <Header />
-               <AddTask addTask={this.addTask}/>
-               <Tasks 
-                  tasks={this.state.tasks} 
-                  markComplete={this.markComplete} 
-                  deleteTask = {this.deleteTask} /> 
+         <Router>
+            <div className="App"> 
+               <div className="container">
+                  <Header />
+                  <AddTask addTask={this.addTask}/>
+                  <Tasks 
+                     tasks={this.state.tasks} 
+                     markComplete={this.markComplete} 
+                     deleteTask = {this.deleteTask} /> 
+               </div>
             </div>
-         </div>
+         </Router>
       );
    }
 }
